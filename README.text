@@ -1,0 +1,21 @@
+# Online_Guess_Number_Game
+
+Console and internet service with simple online games which
+consists in guessing a number from the given range.
+
+## Functionalities:
+
+- You can run application via browser (use WebMain to run) or console (use ConsoleMain to run)
+- You can change language. Default language is set to polish, it is possible to switch to english.
+Use http parameter "locale" to change, e.g. localhost:8080?locale=en to switch for english
+- You can add your guess number to input form and check that you guessed it.
+- After game you can play one more time, or go to the home page.
+
+
+## Technologies used
+- Spring 5 (Multi Module Spring Project using Maven and MVC)
+- Spring Boot 2
+- Java 11
+- Thymeleaf
+- Logging (SLF4j and logback)
+- Lombok
