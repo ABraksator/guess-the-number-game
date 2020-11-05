@@ -21,10 +21,10 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
-        log.debug("postHandle method called. handler = {}", handler);
-        log.debug("URL = {}", request.getRequestURL());
-        log.debug("model = {}", modelAndView.getModel());
-        log.debug("view = {}", modelAndView.getViewName());
+//        log.debug("postHandle method called. handler = {}", handler);
+//        log.debug("URL = {}", request.getRequestURL());
+////        log.debug("model = {}", modelAndView.getModel());
+//        log.debug("view = {}", modelAndView.getViewName());
     }
 
     @Override

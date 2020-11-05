@@ -35,6 +35,21 @@
             <scope>runtime</scope>
         </dependency>
 
+
+
+        <!--BCrypt enable-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

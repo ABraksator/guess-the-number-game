@@ -1,9 +1,11 @@
 package braksator.artur.config;
 
 import braksator.artur.interceptor.RequestInterceptor;
+//import braksator.artur.util.ViewNames;
 import braksator.artur.util.ViewNames;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -19,6 +21,8 @@ public class WebConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
         return new SessionLocaleResolver();
     }
+
+    //ustawia widok HOME na adres locaclhost:port/
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName(ViewNames.HOME);
@@ -35,4 +39,6 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(localeChangeInterceptor);
         registry.addInterceptor(new LocaleChangeInterceptor());
     }
+
+
 }

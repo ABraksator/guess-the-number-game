@@ -1,0 +1,25 @@
+<thlogic>
+
+    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.Test).TEST}__}"/>-->
+
+
+    <!--<attr sel="#login-message" th:text="${TestArur}"/>-->
+    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.Test).TEST}__}"/>-->
+
+
+    <!--<attr sel="#userName" th:text="${__{T(braksator.artur.form.LoginForm}.userName__}" />-->
+    <!--<attr sel="#password" th:text="${__{T(braksator.artur.form.LoginForm}.password__}" />-->
+    <!--<attr sel="#userNameLabel" th:text="${loginForm.userName}" />-->
+    <!--<attr sel="#actionForm" th:action="/user/login" th:object="${loginForm}" th:method="post"  />-->
+<!--<attr sel="#userName" th:field="*{userName}" th:if="${#fields.hasErrors('name')}" th:errors="*{name} />-->
+
+<!--<attr sel="#userName" th:text="${__${T(braksator.artur.form.LoginForm).userName}__}" />-->
+
+
+
+    <!--<attr sel="#login-fail-message" th:text="${message}" />-->
+    <attr sel="#login-fail-message" th:text="${loginMessage}" />
+    <attr sel="#footerId" th:replace="~{fragments/footer :: footer}"/>
+
+    <attr sel="headId" th:replace= "~{fragments/head :: head}" />
+</thlogic>
