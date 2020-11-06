@@ -78,7 +78,7 @@ public class UserController {
     @PostMapping(path = "/login")
     public String processLoginRequest(@Valid LoginForm loginForm, BindingResult result, HttpSession session, RedirectAttributes atts) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             atts.addAttribute("loginMessage", "Fill up the form, please");
             return "redirect:/user/login";
         }
@@ -124,7 +124,7 @@ public class UserController {
     @PostMapping(path = "register")
     public String register(@Valid User user, BindingResult result, HttpSession session, RedirectAttributes atts) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             atts.addAttribute("registerMessage", "Fields are not filled up correctly.");
             return "redirect:/user/register";
         }
@@ -133,18 +133,17 @@ public class UserController {
 //        User user = userRepository.findByUserName(user.getUserName());
 
         User existingUserByEmail = userRepository.findFirstByEmail(user.getEmail());
-        User existingUserByName= userRepository.findByUserName(user.getUserName());
-        if (existingUserByEmail != null || existingUserByName !=null) {
+        User existingUserByName = userRepository.findByUserName(user.getUserName());
+        if (existingUserByEmail != null || existingUserByName != null) {
 //            FieldError error = new FieldError("user", "email", "Sorry, this e-mail is already signed up");
             atts.addAttribute("registerMessage", "Sorry, this user name or e-mail is already registered.");
 //            bresult.addError(error);
             return "redirect:/user/register";
-        }else {
+        } else {
             userRepository.save(user);
             atts.addAttribute("loginMessage", "Congratulation, your account has been successfully created. Pleas login");
             return "redirect:/user/login";
         }
-
 
 
 //        if (user != null) {
@@ -165,6 +164,27 @@ public class UserController {
     }
 
 
+    @GetMapping(path = "/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
+
+
+
+    @GetMapping(path ="/test")
+    public String test(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            return "redirect:/play";
+        }
+        return "redirect:/";
+    }
+
+
+}
+
+
 //    @GetMapping(GameMappings.PLAY)
 //    public String play(Model model) {
 //        model.addAttribute(AttributeNames.MAIN_MESSAGE, gameService.getMainMessage());
@@ -177,4 +197,3 @@ public class UserController {
 //
 //        return ViewNames.PLAY;
 //    }
-}
