@@ -3,8 +3,10 @@ package braksator.artur.interceptor;
 import braksator.artur.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +39,17 @@ public class RequestInterceptor implements HandlerInterceptor {
 
                 return true;
             }else{
+//                request.setAttribute("loginMessage", "Sorry, you have to login before");
+                FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(request);
+                outputFlashMap.put("loginMessage", "Sorry, you have to login before");
+                //New utility added in Spring 5
+                RequestContextUtils.saveOutputFlashMap("/user/login", request, response);
+
                 response.sendRedirect("/user/login");
 //                Model model =
+//                Model model.addAttribute("loginMessage", "Sorry, Incorrect Login or password");
+
+//                Rediratts.addAttribute("loginMessage", "Fill up the form, please");
                 return false;
             }
         }

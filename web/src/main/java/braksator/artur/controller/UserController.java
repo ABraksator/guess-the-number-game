@@ -7,6 +7,7 @@ import braksator.artur.util.AttributeNames;
 import braksator.artur.util.GameMappings;
 import braksator.artur.util.Test;
 import braksator.artur.util.ViewNames;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/user") // This means URL's start with /demo (after Application path)
 public class UserController {
@@ -70,8 +72,10 @@ public class UserController {
 
     @GetMapping(path = "login")
     public String login(Model model, @ModelAttribute("loginMessage") String loginMessage) {
+//    public String login(Model model) {
         model.addAttribute("loginForm", new LoginForm());
         model.addAttribute("loginMessage", loginMessage);
+        log.debug(" model.containsAttribute(loginMessage) ={}", model.containsAttribute("loginError"));
         return "login";
     }
 
