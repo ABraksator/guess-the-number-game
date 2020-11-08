@@ -166,12 +166,21 @@ public class UserController {
 
     @GetMapping(path = "/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("user");
+//        session.removeAttribute("user");
+        session.invalidate();
         return "redirect:/";
     }
 
 
-
+//
+//    @GetMapping(path ="/test")
+//    public String test(HttpSession session){
+//        User user = (User) session.getAttribute("user");
+//        if(user != null){
+//            return "redirect:/play";
+//        }
+//        return "redirect:/";
+//    }
     @GetMapping(path ="/test")
     public String test(HttpSession session){
         User user = (User) session.getAttribute("user");
@@ -180,7 +189,6 @@ public class UserController {
         }
         return "redirect:/";
     }
-
 
 }
 

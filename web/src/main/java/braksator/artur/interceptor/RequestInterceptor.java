@@ -1,6 +1,8 @@
 package braksator.artur.interceptor;
 
+import braksator.artur.entity.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +15,33 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
+//        if(request.getMethod().equals("POST")){
+        //dodajć jeste /user/logout -- chociaż nie bo przeciez musisz byc zalogowanym zeby moc sie wylogowac
+                if(request.getRequestURI().equals("/user/login") || request.getRequestURI().equals("/user/register")) {
+                    return true;
+                }
+
+        log.info("request.getRequestURI() = {}", request.getRequestURI());
+
+        log.info("request.getRequestURI() = {}", request.getRequestURI().startsWith("/user/"));
+
+        if(request.getRequestURI().startsWith("/user/")){
+//            User user = (User) request.getSession(false).getAttribute("user");
+            //chyba powinno byc isRequestedSessionIdValid() - w snesie zamiast warunku z nullem
+//            log.info("User user = (User) request.getSession(false) = {}", user);
+            log.info("User user = (User) request.getSession(false) = {}", request.getSession(false));
+            log.info("request.isRequestedSessionIdValid() = {}", request.isRequestedSessionIdValid());
+
+//            if(user != null){
+            if(request.getSession(false) != null){
+
+                return true;
+            }else{
+                response.sendRedirect("/user/login");
+//                Model model =
+                return false;
+            }
+        }
         log.debug("preHandle method called. handler = {}", handler);
         log.debug("URL = {}", request.getRequestURL());
         return true;
