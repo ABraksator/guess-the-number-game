@@ -170,8 +170,8 @@ public class UserController {
 
     @GetMapping(path = "/logout")
     public String logout(HttpSession session) {
-//        session.removeAttribute("user");
-        session.invalidate();
+        session.removeAttribute("user");
+//        session.invalidate();
         return "redirect:/";
     }
 

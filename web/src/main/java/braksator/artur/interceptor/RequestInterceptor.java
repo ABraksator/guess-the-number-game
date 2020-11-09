@@ -35,7 +35,9 @@ public class RequestInterceptor implements HandlerInterceptor {
             log.info("request.isRequestedSessionIdValid() = {}", request.isRequestedSessionIdValid());
 
 //            if(user != null){
-            if(request.getSession(false) != null){
+//            if(request.getSession(false) != null){
+            User user = (User) request.getSession().getAttribute("user");
+            if(user != null){
 
                 return true;
             }else{
