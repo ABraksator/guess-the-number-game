@@ -2,9 +2,9 @@
     <attr sel="#headId"
          th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#welcome" th:text="#{game.welcome}"/>
-    <attr sel="#play-game"
-          th:href="@{__${T(braksator.artur.util.GameMappings).PLAY}__}"
-          th:text="#{game.play}"/>
+    <attr sel="#login-game"
+          th:href="@{__${T(braksator.artur.util.GameMappings).LOGIN}__}"
+          th:text="#{game.login}"/>
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>
 </thlogic>
