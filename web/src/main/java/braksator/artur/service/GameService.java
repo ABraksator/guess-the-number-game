@@ -1,5 +1,7 @@
 package braksator.artur.service;
 
+import braksator.artur.Game;
+
 public interface GameService {
 
     boolean isGameOver();
@@ -11,5 +13,7 @@ public interface GameService {
     void checkGuess(int guess);
 
     void reset();
+
+    Game getGame();
 
 }

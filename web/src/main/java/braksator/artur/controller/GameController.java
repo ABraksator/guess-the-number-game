@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Slf4j
 @Controller
 public class GameController {
@@ -32,7 +34,7 @@ public class GameController {
         model.addAttribute(AttributeNames.RESULT_MESSAGE, gameService.getResultMessage());
         log.info("model= {}", model);
 
-        if(gameService.isGameOver()) {
+        if (gameService.isGameOver()) {
             return ViewNames.GAME_OVER;
         }
 
@@ -40,9 +42,27 @@ public class GameController {
     }
 
     @PostMapping(GameMappings.PLAY)
-    public String processMessage(@RequestParam int guess) {
-        log.info("guess= {}", guess);
-        gameService.checkGuess(guess);
+    public String processMessage(@RequestParam Optional<Integer> guess) {
+        if (guess.isPresent()) {
+            log.info("guess= {}", guess.get());
+            gameService.checkGuess(guess.get());
+        }
+        return GameMappings.REDIRECT_PLAY;
+    }
+
+    @PostMapping("/play/changeRange")
+    public String changeRange(@RequestParam Optional<Integer> minNumber, @RequestParam Optional<Integer> maxNumber) {
+//    public String changeRange(@RequestParam int minNumber) {
+        if (minNumber.isPresent()) {
+            gameService.getGame().getNumberGenerator().setMinNumber(minNumber.get());
+        }
+        if (maxNumber.isPresent()) {
+            gameService.getGame().getNumberGenerator().setMaxNumber(maxNumber.get());
+        }
+        if (minNumber.isPresent() || maxNumber.isPresent()) {
+            gameService.reset();
+        }
+
         return GameMappings.REDIRECT_PLAY;
     }
 

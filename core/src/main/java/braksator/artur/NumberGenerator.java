@@ -8,4 +8,8 @@ public interface NumberGenerator {
 
     int getMinNumber();
 
+    void setMinNumber(int minNumber);
+
+    void setMaxNumber(int maxNumber);
+
 }

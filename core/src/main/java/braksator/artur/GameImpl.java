@@ -16,7 +16,7 @@ import javax.annotation.PreDestroy;
 public class GameImpl implements Game {
 
     // == fields ==
-    @Getter(AccessLevel.NONE)
+//    @Getter(AccessLevel.NONE)
     private final NumberGenerator numberGenerator;
 
     private final int guessCount;

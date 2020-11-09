@@ -10,9 +10,19 @@
         <h3 id="main-message">
             Main Message Content
         </h3>
+        <form id="min-number"
+              action="play/changeRange"
+              method="post">
+            <label id="enter-minNumber" for="minNumber">Enter min number</label>
+            <input id="minNumber" type="number" name="minNumber"/>
+            <label id="enter-maxNumber" for="maxNumber">Enter max number</label>
+            <input id="maxNumber" type="number" name="maxNumber"/>
+            <input id="min-max-number-submit" type="submit" value="Change Range"/>
+        </form>
         <h3 id="result-message">
             Result Message Content
         </h3>
+
 
         <form id="game-form"
               action="play"

@@ -27,7 +27,7 @@ public class UserController {
     // Created hardcoded User (for demonstrations purpose)
     @EventListener(ApplicationReadyEvent.class)
     public void createAdmin() {
-        User user = new User("Artur", BCrypt.hashpw("Braksator", BCrypt.gensalt()), "artur@gmail.com");
+        User user = new User("a", BCrypt.hashpw("a", BCrypt.gensalt()), "artur@gmail.com");
         userRepository.save(user);
     }
 

@@ -2,6 +2,7 @@ package braksator.artur.service;
 
 import braksator.artur.Game;
 import braksator.artur.MessageGenerator;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ import javax.annotation.PostConstruct;
 public class GameServiceImpl implements GameService {
 
     // == fields ==
-    private final Game game;
+    @Getter
+    private Game game;
     private final MessageGenerator messageGenerator;
 
     // == constructors ==
@@ -56,4 +58,5 @@ public class GameServiceImpl implements GameService {
     public void reset() {
         game.reset();
     }
+
 }
