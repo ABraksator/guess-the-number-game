@@ -3,7 +3,7 @@
          th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#welcome" th:text="#{game.welcome}"/>
     <attr sel="#login-game"
-          th:href="@{__${T(braksator.artur.util.GameMappings).LOGIN}__}"
+          th:href="@{__${T(braksator.artur.util.UserMappings).LOGIN}__}"
           th:text="#{game.login}"/>
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>

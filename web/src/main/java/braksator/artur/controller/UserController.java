@@ -31,7 +31,7 @@ public class UserController {
         userRepository.save(user);
     }
 
-    @GetMapping(path = "login")
+    @GetMapping(path = "/login")
     public String login(Model model, @ModelAttribute("loginMessage") String loginMessage) {
         model.addAttribute("loginForm", new LoginForm());
         model.addAttribute("loginMessage", loginMessage);
