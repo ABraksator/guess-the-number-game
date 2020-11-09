@@ -19,6 +19,7 @@ public class RequestInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 //        if(request.getMethod().equals("POST")){
         //dodajć jeste /user/logout -- chociaż nie bo przeciez musisz byc zalogowanym zeby moc sie wylogowac
+        //wypisanie wyjatków
                 if(request.getRequestURI().equals("/user/login") || request.getRequestURI().equals("/user/register")) {
                     return true;
                 }
@@ -27,7 +28,8 @@ public class RequestInterceptor implements HandlerInterceptor {
 
         log.info("request.getRequestURI() = {}", request.getRequestURI().startsWith("/user/"));
 
-        if(request.getRequestURI().startsWith("/user/")){
+        //wypisanie blacklisty, mozemy dodac kolejne endpoint np request.getRequestURI().startsWith("/play")
+        if(request.getRequestURI().startsWith("/user/") || request.getRequestURI().startsWith("/play")){
 //            User user = (User) request.getSession(false).getAttribute("user");
             //chyba powinno byc isRequestedSessionIdValid() - w snesie zamiast warunku z nullem
 //            log.info("User user = (User) request.getSession(false) = {}", user);
