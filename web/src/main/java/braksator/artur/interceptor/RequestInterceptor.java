@@ -19,6 +19,12 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
+//         feature that check when logged user try to enter /user/login endpoints the will be redirect to /play
+//        if (request.getRequestURI().equals(UserMappings.LOGIN) &&request.getSession().getAttribute(AttributeNames.USER) != null) {
+//            response.sendRedirect(GameMappings.PLAY);
+//            return true;
+//        }
+
         if (request.getRequestURI().equals(UserMappings.LOGIN) || request.getRequestURI().equals(UserMappings.REGISTER)) {
             return true;
         }
