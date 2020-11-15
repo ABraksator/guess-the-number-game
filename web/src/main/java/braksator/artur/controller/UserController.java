@@ -1,7 +1,9 @@
 package braksator.artur.controller;
 
+import braksator.artur.entity.Gameplay;
 import braksator.artur.entity.User;
 import braksator.artur.form.LoginForm;
+import braksator.artur.repository.GameplayRepository;
 import braksator.artur.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -23,12 +25,30 @@ import javax.validation.Valid;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    //no wlasnie juz nie reposotory, tylko service, to on bedzie mial w sobie reposutory. Znaczy zeby zrobić takie rzeczy jak ponizej to trzeba ale
+    // w zalezności od kodu to nie
+    @Autowired
+    private GameplayRepository gameplayRepository ;
 
     // Created hardcoded User (for demonstrations purpose)
     @EventListener(ApplicationReadyEvent.class)
     public void createAdmin() {
         User user = new User("a", BCrypt.hashpw("a", BCrypt.gensalt()), "artur@gmail.com");
         userRepository.save(user);
+        Gameplay gameplay = new Gameplay();
+        gameplay.setWon(true);
+        gameplay.setMaxNumber(100);
+        gameplay.setMinNumber(0);
+        gameplay.setNumberOfGuesses(5);
+        gameplay.setUser(user);
+        gameplayRepository.save(gameplay);
+        Gameplay gameplay2 = new Gameplay();
+        gameplay2.setWon(false);
+        gameplay2.setMaxNumber(80);
+        gameplay2.setMinNumber(20);
+        gameplay2.setNumberOfGuesses(8);
+        gameplay2.setUser(user);
+        gameplayRepository.save(gameplay2);
     }
 
     @GetMapping(path = "/login")
@@ -87,6 +107,7 @@ public class UserController {
     @GetMapping(path = "/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
+        session.invalidate();
         return "redirect:/";
     }
 

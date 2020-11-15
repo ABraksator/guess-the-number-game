@@ -1,6 +1,7 @@
 package braksator.artur.controller;
 
 import braksator.artur.service.GameService;
+import braksator.artur.service.GameplayService;
 import braksator.artur.util.AttributeNames;
 import braksator.artur.util.GameMappings;
 import braksator.artur.util.ViewNames;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Slf4j
@@ -21,20 +23,27 @@ public class GameController {
     // == fields ==
     private final GameService gameService;
 
+    private final GameplayService gameplayService;
+
+
+
     // == constructor ==
     @Autowired
-    public GameController(GameService gameService) {
+    public GameController(GameService gameService, GameplayService gameplayService) {
         this.gameService = gameService;
+        this.gameplayService = gameplayService;
+
     }
 
     // == request methods ==
     @GetMapping(GameMappings.PLAY)
-    public String play(Model model) {
+    public String play(Model model, HttpSession session) {
         model.addAttribute(AttributeNames.MAIN_MESSAGE, gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE, gameService.getResultMessage());
         log.info("model= {}", model);
 
         if (gameService.isGameOver()) {
+            gameplayService.saveGameplay(session);
             return ViewNames.GAME_OVER;
         }
 
@@ -46,6 +55,8 @@ public class GameController {
         if (guess.isPresent()) {
             log.info("guess= {}", guess.get());
             gameService.checkGuess(guess.get());
+            gameplayService.numberOfGuesses();
+
         }
         return GameMappings.REDIRECT_PLAY;
     }
@@ -55,9 +66,13 @@ public class GameController {
 //    public String changeRange(@RequestParam int minNumber) {
         if (minNumber.isPresent()) {
             gameService.getGame().getNumberGenerator().setMinNumber(minNumber.get());
+            log.debug("gameService.getGame().getNumberGenerator().setMinNumber(minNumber.get()) = {}" , minNumber.get());
+            log.debug("gameService.getGame().getNumberGenerator().getMinNumber() = {}" , gameService.getGame().getNumberGenerator().getMinNumber());
+            gameplayService.minNumber();
         }
         if (maxNumber.isPresent()) {
             gameService.getGame().getNumberGenerator().setMaxNumber(maxNumber.get());
+            gameplayService.maxNumber();
         }
         if (minNumber.isPresent() || maxNumber.isPresent()) {
             gameService.reset();

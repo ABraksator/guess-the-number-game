@@ -9,10 +9,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.context.annotation.Bean;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -43,6 +42,18 @@ public class User {
     @Email
     private String email;
 
+    @OneToMany(mappedBy = "user")
+//    @JoinColumn(name="match_id")
+    private List<Gameplay> matches = new ArrayList<Gameplay>();
+
+
+    public List<Gameplay> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Gameplay> matches) {
+        this.matches = matches;
+    }
 
     public String getUserName() {
         return userName;
