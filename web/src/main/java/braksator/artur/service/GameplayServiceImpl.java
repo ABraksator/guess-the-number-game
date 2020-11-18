@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -90,5 +91,17 @@ public class GameplayServiceImpl implements GameplayService {
         gameplay.setMinNumber(gameService.getGame().getNumberGenerator().getMinNumber());
         gameplay.setMaxNumber(gameService.getGame().getNumberGenerator().getMaxNumber());
         gameplay.setWon(true);
+    }
+
+
+    @Override
+    public List<Gameplay> findAllGameplays() {
+        List<Gameplay> findAll = gameplayRepository.findAll();
+        return findAll;
+    }
+
+    @Override
+    public Gameplay findById(Integer id) {
+        return gameplayRepository.findById(id).get();
     }
 }

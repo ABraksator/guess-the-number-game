@@ -88,6 +88,15 @@ public class User {
 //        return new BCryptPasswordEncoder();
 //    }
 
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User [id=" + id + ", username=" + userName + ", password=" + password

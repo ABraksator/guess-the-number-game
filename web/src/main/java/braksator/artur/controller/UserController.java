@@ -41,14 +41,25 @@ public class UserController {
         gameplay.setMinNumber(0);
         gameplay.setNumberOfGuesses(5);
         gameplay.setUser(user);
+        gameplay.setWantedNumber(50);
         gameplayRepository.save(gameplay);
         Gameplay gameplay2 = new Gameplay();
-        gameplay2.setWon(false);
+        gameplay2.setWon(true);
         gameplay2.setMaxNumber(80);
         gameplay2.setMinNumber(20);
         gameplay2.setNumberOfGuesses(8);
         gameplay2.setUser(user);
+        gameplay2.setWantedNumber(40);
         gameplayRepository.save(gameplay2);
+
+        Gameplay gameplay3 = new Gameplay();
+        gameplay3.setWon(true);
+        gameplay3.setMaxNumber(65);
+        gameplay3.setMinNumber(30);
+        gameplay3.setNumberOfGuesses(8);
+        gameplay3.setUser(user);
+        gameplay3.setWantedNumber(60);
+        gameplayRepository.save(gameplay3);
     }
 
     @GetMapping(path = "/login")

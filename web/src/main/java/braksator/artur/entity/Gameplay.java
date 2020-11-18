@@ -3,7 +3,9 @@ package braksator.artur.entity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 //@Id
@@ -15,7 +17,7 @@ import java.time.LocalDateTime;
 //private int numberOfGuesses;
 @Entity
 @Slf4j
-public class Gameplay {
+public class Gameplay{
 
     @Id
     @GeneratedValue
@@ -26,6 +28,23 @@ public class Gameplay {
     @Column(nullable = false)
     private boolean isWon = false;
     private int wantedNumber;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", nullable = false)
+    private Date created;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
     @ManyToOne
     @JoinColumn(name="user_id")

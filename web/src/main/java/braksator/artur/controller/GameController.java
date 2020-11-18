@@ -1,5 +1,7 @@
 package braksator.artur.controller;
 
+import braksator.artur.entity.Gameplay;
+import braksator.artur.entity.User;
 import braksator.artur.service.GameService;
 import braksator.artur.service.GameplayService;
 import braksator.artur.util.AttributeNames;
@@ -10,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -86,4 +90,37 @@ public class GameController {
         gameService.reset();
         return GameMappings.REDIRECT_PLAY;
     }
+
+
+
+
+    @GetMapping("/play/gameplays")
+    public String allGameplay(Model model, HttpSession httpSession){
+
+        User user =  (User) httpSession.getAttribute("user");
+        List<Gameplay>  gameplaysList = gameplayService.findAllGameplays();
+
+        gameplaysList.removeIf(o -> o.getUser().getId() != user.getId());
+//        model.addAttribute("gameplays", gameplayService.findAllGameplays());
+        model.addAttribute("gameplays", gameplaysList);
+
+//        log.debug("User user =  (User) httpSession.getAttribute(\"user\"); = {}", user);
+        return "/gameplays";
+    }
+
+    @GetMapping("/play/gameplays/details/{id}")
+    public String showGameplay(@PathVariable("id") int id, Model model, HttpSession httpSession){
+
+        User user =  (User) httpSession.getAttribute("user");
+        Gameplay gameplayDetail = gameplayService.findById(id);
+
+        if(gameplayDetail.getUser().getId() ==user.getId()) {
+//        model.addAttribute("gameplay", gameplayService.findById(id));
+            model.addAttribute("gameplay", gameplayDetail);
+        }
+
+
+        return "/gameplay-details";
+    }
+
 }
