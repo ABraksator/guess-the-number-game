@@ -65,7 +65,7 @@ public class GameController {
         return GameMappings.REDIRECT_PLAY;
     }
 
-    @PostMapping("/play/changeRange")
+    @PostMapping(GameMappings.CHANGE_RANGE)
     public String changeRange(@RequestParam Optional<Integer> minNumber, @RequestParam Optional<Integer> maxNumber) {
 //    public String changeRange(@RequestParam int minNumber) {
         if (minNumber.isPresent()) {
@@ -94,7 +94,7 @@ public class GameController {
 
 
 
-    @GetMapping("/play/gameplays")
+    @GetMapping(GameMappings.GAMEPLAYS)
     public String allGameplay(Model model, HttpSession httpSession){
 
         User user =  (User) httpSession.getAttribute("user");
@@ -105,10 +105,10 @@ public class GameController {
         model.addAttribute("gameplays", gameplaysList);
 
 //        log.debug("User user =  (User) httpSession.getAttribute(\"user\"); = {}", user);
-        return "/gameplays";
+        return ViewNames.GAMEPLAYS;
     }
 
-    @GetMapping("/play/gameplays/details/{id}")
+    @GetMapping(GameMappings.GAMEPLAY_DETAILS)
     public String showGameplay(@PathVariable("id") int id, Model model, HttpSession httpSession){
 
         User user =  (User) httpSession.getAttribute("user");
@@ -119,8 +119,7 @@ public class GameController {
             model.addAttribute("gameplay", gameplayDetail);
         }
 
-
-        return "/gameplay-details";
+        return ViewNames.GAMEPLAY_DETAILS;
     }
 
 }

@@ -25,7 +25,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 //            return true;
 //        }
 
-        if (request.getRequestURI().equals(UserMappings.LOGIN) || request.getRequestURI().equals(UserMappings.REGISTER)) {
+        if (request.getRequestURI().equals(UserMappings.USER+UserMappings.LOGIN) || request.getRequestURI().equals(UserMappings.USER+UserMappings.REGISTER)) {
             return true;
         }
         log.info("request.getRequestURI() = {}", request.getRequestURI());

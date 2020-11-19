@@ -5,6 +5,9 @@ import braksator.artur.entity.User;
 import braksator.artur.form.LoginForm;
 import braksator.artur.repository.GameplayRepository;
 import braksator.artur.repository.UserRepository;
+import braksator.artur.util.GameMappings;
+import braksator.artur.util.UserMappings;
+import braksator.artur.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @Controller
-@RequestMapping(path = "/user")
+@RequestMapping(path = UserMappings.USER)
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -62,72 +65,63 @@ public class UserController {
         gameplayRepository.save(gameplay3);
     }
 
-    @GetMapping(path = "/login")
+    @GetMapping(path = UserMappings.LOGIN)
     public String login(Model model, @ModelAttribute("loginMessage") String loginMessage) {
         model.addAttribute("loginForm", new LoginForm());
         model.addAttribute("loginMessage", loginMessage);
         log.debug(" model.containsAttribute(loginMessage) ={}", model.containsAttribute("loginError"));
-        return "login";
+        return ViewNames.LOGIN;
     }
 
-    @PostMapping(path = "/login")
+    @PostMapping(path = UserMappings.LOGIN)
     public String processLoginRequest(@Valid LoginForm loginForm, BindingResult result, HttpSession session, RedirectAttributes atts) {
 
         if (result.hasErrors()) {
             atts.addAttribute("loginMessage", "Fill up the form, please");
-            return "redirect:/user/login";
+            return UserMappings.REDIRECT_LOGIN;
         }
         User user = userRepository.findByUserName(loginForm.getUserName());
         if (user != null && BCrypt.checkpw(loginForm.getPassword(), user.getPassword())) {
             session.setAttribute("user", user);
-            return "redirect:/play";
+            return GameMappings.REDIRECT_PLAY;
         } else {
             atts.addAttribute("loginMessage", "Sorry, Incorrect Login or password");
-            return "redirect:/user/login";
+            return UserMappings.REDIRECT_LOGIN;
         }
     }
 
-    @GetMapping(path = "register")
+    @GetMapping(path = UserMappings.REGISTER)
     public String register(Model model, @ModelAttribute("registerMessage") String message) {
         if (message.length() == 0) {
             model.addAttribute("message", message);
         }
-        return "register";
+        return ViewNames.REGISTER;
     }
 
-    @PostMapping(path = "register")
+    @PostMapping(path = UserMappings.REGISTER)
     public String register(@Valid User user, BindingResult result, RedirectAttributes atts) {
 
         if (result.hasErrors()) {
             atts.addAttribute("registerMessage", "Fields are not filled up correctly.");
-            return "redirect:/user/register";
+            return UserMappings.REDIRECT_REGISTER;
         }
 
         User existingUserByEmail = userRepository.findFirstByEmail(user.getEmail());
         User existingUserByName = userRepository.findByUserName(user.getUserName());
         if (existingUserByEmail != null || existingUserByName != null) {
             atts.addAttribute("registerMessage", "Sorry, this user name or e-mail is already registered.");
-            return "redirect:/user/register";
+            return UserMappings.REDIRECT_REGISTER;
         } else {
             userRepository.save(user);
             atts.addAttribute("loginMessage", "Congratulation, your account has been successfully created. Pleas login");
-            return "redirect:/user/login";
+            return UserMappings.REDIRECT_LOGIN;
         }
     }
 
-    @GetMapping(path = "/logout")
+    @GetMapping(path = UserMappings.LOGOUT)
     public String logout(HttpSession session) {
         session.removeAttribute("user");
         session.invalidate();
-        return "redirect:/";
-    }
-
-    @GetMapping(path = "/test")
-    public String test(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            return "redirect:/play";
-        }
-        return "redirect:/";
+        return GameMappings.REDIRECT_HOME;
     }
 }
