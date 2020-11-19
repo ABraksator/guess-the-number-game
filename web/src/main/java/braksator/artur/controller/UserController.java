@@ -44,7 +44,7 @@ public class UserController {
         gameplay.setWantedNumber(50);
         gameplayRepository.save(gameplay);
         Gameplay gameplay2 = new Gameplay();
-        gameplay2.setWon(true);
+        gameplay2.setWon(false);
         gameplay2.setMaxNumber(80);
         gameplay2.setMinNumber(20);
         gameplay2.setNumberOfGuesses(8);

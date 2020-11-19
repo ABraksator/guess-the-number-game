@@ -3,8 +3,6 @@ package braksator.artur.entity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -13,7 +11,7 @@ import java.util.Date;
 //private Integer id;
 //private int minNumber;
 //private int maxNumber;
-////    private boolean isWon;
+////    private boolean won;
 //private int numberOfGuesses;
 @Entity
 @Slf4j
@@ -26,7 +24,7 @@ public class Gameplay{
     private int maxNumber;
     private int numberOfGuesses;
     @Column(nullable = false)
-    private boolean isWon = false;
+    private boolean won = false;
     private int wantedNumber;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -92,11 +90,11 @@ public class Gameplay{
     }
 
     public boolean isWon() {
-        return isWon;
+        return won;
     }
 
     public void setWon(boolean won) {
-        isWon = won;
+        this.won = won;
     }
 
     public int getWantedNumber() {
@@ -114,7 +112,7 @@ public class Gameplay{
                 ", minNumber=" + minNumber +
                 ", maxNumber=" + maxNumber +
                 ", numberOfGuesses=" + numberOfGuesses +
-                ", isWon=" + isWon +
+                ", won=" + won +
                 ", wantedNumber=" + wantedNumber +
                 ", user=" + user +
                 '}';

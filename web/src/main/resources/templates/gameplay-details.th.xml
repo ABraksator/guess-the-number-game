@@ -41,6 +41,38 @@
     <attr sel="#GameplayDetailTable" >
         <attr sel="/tr[1]" th:each="gameplay : ${gameplay}">
             <attr sel="td.CreatedAt" th:text="${gameplay.created}" />
+            <!--<attr sel="td.Result" th:if="${gameplay.isWon}">-->
+
+<!--TO DO CHANGE CONDITION RESULT TO I18N TO WYGRANA/WON PRZEGRANA/LOSS-->
+            <attr sel="td.Result" th:text ="${gameplay.won} ? ${gameplay.won} : ${gameplay.won}" />
+            <!--<attr sel="td.Result" th:if ="${!gameplay.won}" th:text="test"/>-->
+
+            <!--<attr sel="td.Result" >-->
+                <!--<attr sel="span.Condition" th:if ="${gameplay.won}">-->
+            <!--<attr sel="span.Condition" th:text="wygrał"/>-->
+                <!--</attr>-->
+                <!--<attr sel="span.Condition" th:if ="${!gameplay.won}">-->
+                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
+                <!--</attr>-->
+            <!--</attr>-->
+
+            <!--<attr sel="td.Result" th:unless ="${gameplay.won}">-->
+                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
+            <!--</attr>-->
+
+            <!--<attr sel="td.Result" th:unless ="${gameplay.won}">-->
+                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
+            <!--</attr>-->
+            <!--<attr sel="td.Result" th:unless ="${gameplay.won}" th:text="przegrał"/>-->
+
+
+            <!--<attr sel="td.Result" th:unless ="${gameplay.won}" th:text="przegrał"/>-->
+            <!--<attr sel="td.Result" th:text="test" />-->
+            <!--</attr>-->
+
+            <!--<attr sel="td.Result" th:unless="${gameplay.isWon}">-->
+                <!--<attr sel="td.Result" th:text="test" />-->
+            <!--</attr>-->
 
         </attr>
     </attr>
