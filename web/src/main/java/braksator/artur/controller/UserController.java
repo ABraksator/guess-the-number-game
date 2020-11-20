@@ -6,6 +6,7 @@ import braksator.artur.form.LoginForm;
 import braksator.artur.repository.GameplayRepository;
 import braksator.artur.repository.UserRepository;
 import braksator.artur.util.GameMappings;
+import braksator.artur.util.LoginMessages;
 import braksator.artur.util.UserMappings;
 import braksator.artur.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,8 @@ public class UserController {
     // w zalezności od kodu to nie
     @Autowired
     private GameplayRepository gameplayRepository ;
+    @Autowired
+    private LoginMessages loginMessages;
 
     // Created hardcoded User (for demonstrations purpose)
     @EventListener(ApplicationReadyEvent.class)
@@ -77,7 +80,7 @@ public class UserController {
     public String processLoginRequest(@Valid LoginForm loginForm, BindingResult result, HttpSession session, RedirectAttributes atts) {
 
         if (result.hasErrors()) {
-            atts.addAttribute("loginMessage", "Fill up the form, please");
+            atts.addAttribute("loginMessage", loginMessages.user_login_empty());
             return UserMappings.REDIRECT_LOGIN;
         }
         User user = userRepository.findByUserName(loginForm.getUserName());
@@ -85,7 +88,7 @@ public class UserController {
             session.setAttribute("user", user);
             return GameMappings.REDIRECT_PLAY;
         } else {
-            atts.addAttribute("loginMessage", "Sorry, Incorrect Login or password");
+            atts.addAttribute("loginMessage", loginMessages.user_login_incorrect());
             return UserMappings.REDIRECT_LOGIN;
         }
     }
@@ -102,18 +105,18 @@ public class UserController {
     public String register(@Valid User user, BindingResult result, RedirectAttributes atts) {
 
         if (result.hasErrors()) {
-            atts.addAttribute("registerMessage", "Fields are not filled up correctly.");
+            atts.addAttribute("registerMessage", loginMessages.user_registration_incorrect());
             return UserMappings.REDIRECT_REGISTER;
         }
 
         User existingUserByEmail = userRepository.findFirstByEmail(user.getEmail());
         User existingUserByName = userRepository.findByUserName(user.getUserName());
         if (existingUserByEmail != null || existingUserByName != null) {
-            atts.addAttribute("registerMessage", "Sorry, this user name or e-mail is already registered.");
+            atts.addAttribute("registerMessage", loginMessages.user_registration_exists());
             return UserMappings.REDIRECT_REGISTER;
         } else {
             userRepository.save(user);
-            atts.addAttribute("loginMessage", "Congratulation, your account has been successfully created. Pleas login");
+            atts.addAttribute("loginMessage", loginMessages.user_registration_successful());
             return UserMappings.REDIRECT_LOGIN;
         }
     }

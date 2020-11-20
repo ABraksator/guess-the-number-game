@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull;
 public class LoginForm {
 
     @NotBlank
-    private String userName = "Your Name keeepasa";
+    private String userName;
     @NotBlank
-    private String password = "Your Password keeepasa";
+    private String password;
 
     public LoginForm() {}
 

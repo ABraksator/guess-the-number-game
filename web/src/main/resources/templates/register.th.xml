@@ -1,10 +1,10 @@
 <thlogic>
 
-    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.Test).TEST}__}"/>-->
+    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.LoginMessagesnMessages).TEST}__}"/>-->
 
 
     <!--<attr sel="#login-message" th:text="${TestArur}"/>-->
-    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.Test).TEST}__}"/>-->
+    <!--<attr sel="#login-message" th:text="${__${T(braksator.artur.util.LoginMessagesnMessages).TEST}__}"/>-->
 
 
     <!--<attr sel="#userName" th:text="${__{T(braksator.artur.form.LoginForm}.userName__}" />-->
