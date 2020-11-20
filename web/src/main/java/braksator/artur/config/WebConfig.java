@@ -26,9 +26,15 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName(ViewNames.HOME);
     }
 
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return new RequestInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestInterceptor());
+        registry.addInterceptor(requestInterceptor());
         registry.addInterceptor(new LocaleChangeInterceptor());
     }
+
 }

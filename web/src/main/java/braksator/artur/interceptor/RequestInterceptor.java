@@ -3,8 +3,10 @@ package braksator.artur.interceptor;
 import braksator.artur.entity.User;
 import braksator.artur.util.AttributeNames;
 import braksator.artur.util.GameMappings;
+import braksator.artur.util.LoginMessages;
 import braksator.artur.util.UserMappings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 public class RequestInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    private LoginMessages loginMessages;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -29,8 +34,8 @@ public class RequestInterceptor implements HandlerInterceptor {
                 return true;
             } else {
                 FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(request);
-                outputFlashMap.put(AttributeNames.LOGIN_MESSAGE, "Sorry, you have to login before");
-                RequestContextUtils.saveOutputFlashMap(UserMappings.LOGIN, request, response);
+                outputFlashMap.put(AttributeNames.LOGIN_MESSAGE, loginMessages.user_login_required());
+                RequestContextUtils.saveOutputFlashMap(UserMappings.HOME_LOGIN, request, response);
                 response.sendRedirect(UserMappings.HOME_LOGIN);
                 return false;
             }

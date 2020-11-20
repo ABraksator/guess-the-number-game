@@ -20,6 +20,8 @@ public class LoginMessages {
 
     public static final String USER_REGISTRATION_SUCCESSFUL = "user.registration.successful";
 
+    public static final String USER_LOGIN_REQUIRED= "user.login.required";
+
     private final MessageSource messageSource;
 
     // == constructor ==
@@ -30,6 +32,10 @@ public class LoginMessages {
 
     public String user_login_empty() {
         return getMessage(USER_LOGIN_EMPTY);
+    }
+
+    public String user_login_required() {
+        return getMessage(USER_LOGIN_REQUIRED);
     }
 
     public String user_login_incorrect() {

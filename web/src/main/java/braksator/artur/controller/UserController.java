@@ -40,7 +40,7 @@ public class UserController {
     // Created hardcoded User (for demonstrations purpose)
     @EventListener(ApplicationReadyEvent.class)
     public void createAdmin() {
-        User user = new User("User", BCrypt.hashpw("User", BCrypt.gensalt()), "user@mail.com");
+        User user = new User("user", BCrypt.hashpw("user", BCrypt.gensalt()), "user@mail.com");
         userRepository.save(user);
         Gameplay gameplay = new Gameplay();
         gameplay.setWon(true);
