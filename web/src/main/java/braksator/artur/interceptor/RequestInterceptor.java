@@ -9,7 +9,6 @@ import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,17 +18,10 @@ public class RequestInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-//         feature that check when logged user try to enter /user/login endpoints the will be redirect to /play
-//        if (request.getRequestURI().equals(UserMappings.LOGIN) &&request.getSession().getAttribute(AttributeNames.USER) != null) {
-//            response.sendRedirect(GameMappings.PLAY);
-//            return true;
-//        }
 
         if (request.getRequestURI().equals(UserMappings.USER+UserMappings.LOGIN) || request.getRequestURI().equals(UserMappings.USER+UserMappings.REGISTER)) {
             return true;
         }
-        log.info("request.getRequestURI() = {}", request.getRequestURI());
-        log.info("request.getRequestURI() = {}", request.getRequestURI().startsWith(GameMappings.PLAY));
 
         if (request.getRequestURI().startsWith(UserMappings.USER) || request.getRequestURI().startsWith(GameMappings.PLAY)) {
             User user = (User) request.getSession().getAttribute(AttributeNames.USER);
@@ -43,25 +35,16 @@ public class RequestInterceptor implements HandlerInterceptor {
                 return false;
             }
         }
-        log.debug("preHandle method called. handler = {}", handler);
-        log.debug("URL = {}", request.getRequestURL());
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
-//        log.debug("postHandle method called. handler = {}", handler);
-//        log.debug("URL = {}", request.getRequestURL());
-////        log.debug("model = {}", modelAndView.getModel());
-//        log.debug("view = {}", modelAndView.getViewName());
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
-        log.debug("afterCompletion method called. handler = {}", handler);
-        log.debug("URL = {}", request.getRequestURL());
-
     }
 }

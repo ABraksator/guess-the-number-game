@@ -2,42 +2,6 @@
     <attr sel="#headId"
           th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#game-title" th:text="#{game.title}"/>
-    <!--<attr sel="#main-message"-->
-    <!--th:text="${__${T(braksator.artur.util.AttributeNames).MAIN_MESSAGE}__}"/>-->
-    <!--<attr sel="#result-message"-->
-    <!--th:text="${__${T(braksator.artur.util.AttributeNames).RESULT_MESSAGE}__}"/>-->
-    <!--<attr sel="#game-form"-->
-    <!--th:action="@{__${T(braksator.artur.util.GameMappings).PLAY}__}"/>-->
-    <!--<attr sel="#enter-guess" th:text="#{game.enter.guess}"/>-->
-    <!--<attr sel="#submit" th:value="#{game.submit}"/>-->
-
-
-    <!--<attr sel="#gameplays-table" th:remove="all-but-first">-->
-    <!--<attr sel="#gameplays-table" th:remove="tag">-->
-    <!--<attr sel="#GameplaysTable" >-->
-
-    <!--&lt;!&ndash;<attr sel="/tr[0]" th:each="gameplay : ${gameplays}"/>&ndash;&gt;-->
-    <!--<attr sel="/tr[0]">-->
-    <!--<attr sel="td.Max" th:text="MAX NUMBER" />-->
-    <!--&lt;!&ndash;<attr sel="th.min-number" th:text="MIN NUMBER" />&ndash;&gt;-->
-    <!--&lt;!&ndash;<attr sel="th.number-of-guesses" th:text="test" />&ndash;&gt;-->
-    <!--&lt;!&ndash;<attr sel="#number-of-guesses" th:text="NUMBER OF GUESSES" />&ndash;&gt;-->
-    <!--</attr>-->
-
-    <!--<attr sel="/tr[1]" th:each="gameplay : ${gameplays}">-->
-    <!--<attr sel="/tr[1]">-->
-    <!--<attr sel="td.max-number" th:text="pierwszy" />-->
-    <!--<attr sel="td.min-number" th:text="drugi" />-->
-    <!--<attr sel="td.number-of-guesses" th:text="trzeci" />-->
-    <!--</attr>-->
-
-    <!--<attr sel="/tr[1]" th:each="gameplay : ${gameplays}">-->
-    <!--<attr sel="td.max-number" th:text="${gameplay.maxNumber}" />-->
-    <!--<attr sel="td.min-number" th:text="${gameplay.minNumber}" />-->
-    <!--<attr sel="td.number-of-guesses" th:text="${gameplay.isWon}" />-->
-    <!--</attr>-->
-    <!--</attr>-->
-    <!--<attr sel="#GameplayTable" th:remove="all-but-first">-->
     <attr sel="#maxNumber" th:text="#{gameplays.maxNumber}"/>
     <attr sel="#minNumber" th:text="#{gameplays.minNumber}"/>
     <attr sel="#numberOfGuesses" th:text="#{gameplays.numberOfGuesses}"/>
@@ -46,38 +10,12 @@
         <attr sel="/tr[1]" th:each="gameplay : ${gameplays}">
             <attr sel="td.Max" th:text="${gameplay.maxNumber}"/>
             <attr sel="td.Min" th:text="${gameplay.minNumber}"/>
-
-            <!--TO DO -->
-            <!--<attr th:if="${gameplay.isWon}">-->
-            <!--<attr sel="td.IsWon" th:text="wygrał" />-->
-            <!--</attr>-->
-
-            <!--<attr th:unless="${gameplay.isWon}">-->
-            <!--<attr sel="td.IsWon" th:text="przegral" />-->
-            <!--</attr>-->
-            <!--<attr sel="td.IsWon" th:text="${gameplay.isWon}  ? 'win' : 'lost'" />-->
-
-
             <attr sel="td.NumberOfGuesses" th:text="${gameplay.numberOfGuesses}"/>
             <attr sel="td.WantedNumber" th:text="${gameplay.wantedNumber}"/>
-            <!--<attr sel="a.Url" th:href="/gameplay/${gameplay.id}" th:text="Details" />-->
-            <!--<attr sel="a.Url" th:href="@{gameplays/details(id=${gameplay.id})}" th:text="Details" />-->
             <attr sel="a.Url" th:href="@{'gameplays/details/' + ${gameplay.id}}" th:text="#{gameplays.detailsLabel}"/>
-            <!--<attr sel="a.Url" th:href="www.google.pl"/>-->
-            <!--</attr>-->
-
-            <!--<attr sel="td.Comments" th:text="${prod.comments != null and (not #lists.isEmpty(prod.comments)) ? #lists.size(prod.comments) : 0}" />-->
         </attr>
     </attr>
     <attr sel="#play" th:value="#{gameplays.play}"/>
-
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>
 </thlogic>
-
-        <!--<attr th:if="${gameplay.isWon == 'true'}" >-->
-        <!--<attr sel="td.isWon"  th:text="wygrana" >-->
-        <!--</attr>-->
-        <!--<attr th:unless="${gameplay.isWon == 'false'}"/>-->
-        <!--<attr sel="td.isWon" th:text="przegrana" />-->
-        <!--</attr>-->

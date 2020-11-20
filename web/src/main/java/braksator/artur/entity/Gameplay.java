@@ -5,14 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import java.util.Date;
 
-
-//@Id
-//@GeneratedValue
-//private Integer id;
-//private int minNumber;
-//private int maxNumber;
-////    private boolean won;
-//private int numberOfGuesses;
 @Entity
 @Slf4j
 public class Gameplay{
@@ -31,6 +23,10 @@ public class Gameplay{
     @Column(name = "created", nullable = false)
     private Date created;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
     @PrePersist
     protected void onCreate() {
         created = new Date();
@@ -43,11 +39,6 @@ public class Gameplay{
     public void setCreated(Date created) {
         this.created = created;
     }
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
 
     public Integer getId() {
         return id;

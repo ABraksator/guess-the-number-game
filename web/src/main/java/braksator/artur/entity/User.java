@@ -1,18 +1,12 @@
 package braksator.artur.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.context.annotation.Bean;
-
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 public class User {
@@ -43,7 +37,6 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "user")
-//    @JoinColumn(name="match_id")
     private List<Gameplay> matches = new ArrayList<Gameplay>();
 
 
@@ -68,9 +61,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-//        String hash = encoder().encode(password);
-//        this.password = password;
-
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
         this.password = hashed;
     }
@@ -82,12 +72,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    @Bean
-//    public PasswordEncoder encoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
 
     public Integer getId() {
         return id;
@@ -102,6 +86,4 @@ public class User {
         return "User [id=" + id + ", username=" + userName + ", password=" + password
                 + ", email=" + email + "]";
     }
-
-
 }

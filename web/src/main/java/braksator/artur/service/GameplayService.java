@@ -6,11 +6,12 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface GameplayService {
-    void minNumber( );
-//    int minNumber();
-    void  maxNumber();
-void numberOfGuesses();
-//    boolean isWon();
+    void minNumber();
+
+    void maxNumber();
+
+    void numberOfGuesses();
+
     void saveGameplay(HttpSession session);
 
     List<Gameplay> findAllGameplays();

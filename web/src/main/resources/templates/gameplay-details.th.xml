@@ -1,92 +1,16 @@
 <thlogic>
     <attr sel="#headId"
-         th:replace="~{fragments/head :: headFragment}"/>
+          th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#game-title" th:text="#{game.title}"/>
-    <!--<attr sel="#main-message"-->
-          <!--th:text="${__${T(braksator.artur.util.AttributeNames).MAIN_MESSAGE}__}"/>-->
-    <!--<attr sel="#result-message"-->
-          <!--th:text="${__${T(braksator.artur.util.AttributeNames).RESULT_MESSAGE}__}"/>-->
-    <!--<attr sel="#game-form"-->
-          <!--th:action="@{__${T(braksator.artur.util.GameMappings).PLAY}__}"/>-->
-    <!--<attr sel="#enter-guess" th:text="#{game.enter.guess}"/>-->
-    <!--<attr sel="#submit" th:value="#{game.submit}"/>-->
-
-
-    <!--<attr sel="#gameplays-table" th:remove="all-but-first">-->
-    <!--<attr sel="#gameplays-table" th:remove="tag">-->
-    <!--<attr sel="#GameplaysTable" >-->
-
-    <!--&lt;!&ndash;<attr sel="/tr[0]" th:each="gameplay : ${gameplays}"/>&ndash;&gt;-->
-        <!--<attr sel="/tr[0]">-->
-            <!--<attr sel="td.Max" th:text="MAX NUMBER" />-->
-            <!--&lt;!&ndash;<attr sel="th.min-number" th:text="MIN NUMBER" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<attr sel="th.number-of-guesses" th:text="test" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<attr sel="#number-of-guesses" th:text="NUMBER OF GUESSES" />&ndash;&gt;-->
-        <!--</attr>-->
-
-        <!--<attr sel="/tr[1]" th:each="gameplay : ${gameplays}">-->
-        <!--<attr sel="/tr[1]">-->
-            <!--<attr sel="td.max-number" th:text="pierwszy" />-->
-            <!--<attr sel="td.min-number" th:text="drugi" />-->
-            <!--<attr sel="td.number-of-guesses" th:text="trzeci" />-->
-        <!--</attr>-->
-
-        <!--<attr sel="/tr[1]" th:each="gameplay : ${gameplays}">-->
-            <!--<attr sel="td.max-number" th:text="${gameplay.maxNumber}" />-->
-            <!--<attr sel="td.min-number" th:text="${gameplay.minNumber}" />-->
-            <!--<attr sel="td.number-of-guesses" th:text="${gameplay.isWon}" />-->
-        <!--</attr>-->
-    <!--</attr>-->
-    <!--<attr sel="#GameplayTable" th:remove="all-but-first">-->
-    <attr sel="#GameplayDetailTable" >
+    <attr sel="#GameplayDetailTable">
         <attr sel="#createdAt" th:text="#{gameplays.createdAt}"/>
         <attr sel="#result" th:text="#{gameplays.result}"/>
         <attr sel="/tr[1]" th:each="gameplay : ${gameplay}">
-            <attr sel="td.CreatedAt" th:text="${gameplay.created}" />
-            <!--<attr sel="td.Result" th:if="${gameplay.isWon}">-->
-
-<!--TO DO CHANGE CONDITION RESULT TO I18N TO WYGRANA/WON PRZEGRANA/LOSS-->
-            <attr sel="td.Result" th:text ="${gameplay.won} ? ${gameplay.won} : ${gameplay.won}" />
-            <!--<attr sel="td.Result" th:if ="${!gameplay.won}" th:text="test"/>-->
-
-            <!--<attr sel="td.Result" >-->
-                <!--<attr sel="span.Condition" th:if ="${gameplay.won}">-->
-            <!--<attr sel="span.Condition" th:text="wygrał"/>-->
-                <!--</attr>-->
-                <!--<attr sel="span.Condition" th:if ="${!gameplay.won}">-->
-                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
-                <!--</attr>-->
-            <!--</attr>-->
-
-            <!--<attr sel="td.Result" th:unless ="${gameplay.won}">-->
-                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
-            <!--</attr>-->
-
-            <!--<attr sel="td.Result" th:unless ="${gameplay.won}">-->
-                <!--<attr sel="span.Condition" th:text="przegrał"/>-->
-            <!--</attr>-->
-            <!--<attr sel="td.Result" th:unless ="${gameplay.won}" th:text="przegrał"/>-->
-
-
-            <!--<attr sel="td.Result" th:unless ="${gameplay.won}" th:text="przegrał"/>-->
-            <!--<attr sel="td.Result" th:text="test" />-->
-            <!--</attr>-->
-
-            <!--<attr sel="td.Result" th:unless="${gameplay.isWon}">-->
-                <!--<attr sel="td.Result" th:text="test" />-->
-            <!--</attr>-->
-
+            <attr sel="td.CreatedAt" th:text="${gameplay.created}"/>
+            <attr sel="td.Result" th:text="${gameplay.won} ? ${gameplay.won} : ${gameplay.won}"/>
         </attr>
     </attr>
-<attr sel="#gameplays-label" th:value="#{game.scores}"/>
-
+    <attr sel="#gameplays-label" th:value="#{game.scores}"/>
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>
 </thlogic>
-
-<!--<attr th:if="${gameplay.isWon == 'true'}" >-->
-<!--<attr sel="td.isWon"  th:text="wygrana" >-->
-<!--</attr>-->
-<!--<attr th:unless="${gameplay.isWon == 'false'}"/>-->
-<!--<attr sel="td.isWon" th:text="przegrana" />-->
-<!--</attr>-->

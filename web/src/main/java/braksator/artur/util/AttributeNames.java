@@ -9,5 +9,6 @@ public final class AttributeNames {
     public static final String LOGIN_MESSAGE = "loginMessage";
 
     // == constructor ==
-    private AttributeNames() {}
+    private AttributeNames() {
+    }
 }

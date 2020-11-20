@@ -27,13 +27,6 @@ public class GameServiceImpl implements GameService {
         this.messageGenerator = messageGenerator;
     }
 
-    // == init ==
-    @PostConstruct
-    public void init() {
-        log.info("number = {}", game.getNumber());
-        log.info("mainMessage = {}", messageGenerator.getMainMessage());
-    }
-
     // == public methods ==
     @Override
     public boolean isGameOver() {
@@ -60,5 +53,4 @@ public class GameServiceImpl implements GameService {
     public void reset() {
         game.reset();
     }
-
 }

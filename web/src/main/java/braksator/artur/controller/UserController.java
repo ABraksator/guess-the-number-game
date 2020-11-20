@@ -27,19 +27,20 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(path = UserMappings.USER)
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
-    //no wlasnie juz nie reposotory, tylko service, to on bedzie mial w sobie reposutory. Znaczy zeby zrobić takie rzeczy jak ponizej to trzeba ale
-    // w zalezności od kodu to nie
+
     @Autowired
     private GameplayRepository gameplayRepository ;
+
     @Autowired
     private LoginMessages loginMessages;
 
     // Created hardcoded User (for demonstrations purpose)
     @EventListener(ApplicationReadyEvent.class)
     public void createAdmin() {
-        User user = new User("a", BCrypt.hashpw("a", BCrypt.gensalt()), "artur@gmail.com");
+        User user = new User("User", BCrypt.hashpw("User", BCrypt.gensalt()), "user@mail.com");
         userRepository.save(user);
         Gameplay gameplay = new Gameplay();
         gameplay.setWon(true);
@@ -72,7 +73,6 @@ public class UserController {
     public String login(Model model, @ModelAttribute("loginMessage") String loginMessage) {
         model.addAttribute("loginForm", new LoginForm());
         model.addAttribute("loginMessage", loginMessage);
-        log.debug(" model.containsAttribute(loginMessage) ={}", model.containsAttribute("loginError"));
         return ViewNames.LOGIN;
     }
 

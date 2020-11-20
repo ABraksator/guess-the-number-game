@@ -1,6 +1,6 @@
 <thlogic>
     <attr sel="#headId"
-         th:replace="~{fragments/head :: headFragment}"/>
+          th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#welcome" th:text="#{game.welcome}"/>
     <attr sel="#login-game"
           th:href="@{__${T(braksator.artur.util.UserMappings).HOME_LOGIN}__}"

@@ -29,14 +29,11 @@ public class GameController {
 
     private final GameplayService gameplayService;
 
-
-
     // == constructor ==
     @Autowired
     public GameController(GameService gameService, GameplayService gameplayService) {
         this.gameService = gameService;
         this.gameplayService = gameplayService;
-
     }
 
     // == request methods ==
@@ -44,34 +41,26 @@ public class GameController {
     public String play(Model model, HttpSession session) {
         model.addAttribute(AttributeNames.MAIN_MESSAGE, gameService.getMainMessage());
         model.addAttribute(AttributeNames.RESULT_MESSAGE, gameService.getResultMessage());
-        log.info("model= {}", model);
-
         if (gameService.isGameOver()) {
             gameplayService.saveGameplay(session);
             return ViewNames.GAME_OVER;
         }
-
         return ViewNames.PLAY;
     }
 
     @PostMapping(GameMappings.PLAY)
     public String processMessage(@RequestParam Optional<Integer> guess) {
         if (guess.isPresent()) {
-            log.info("guess= {}", guess.get());
             gameService.checkGuess(guess.get());
             gameplayService.numberOfGuesses();
-
         }
         return GameMappings.REDIRECT_PLAY;
     }
 
     @PostMapping(GameMappings.CHANGE_RANGE)
     public String changeRange(@RequestParam Optional<Integer> minNumber, @RequestParam Optional<Integer> maxNumber) {
-//    public String changeRange(@RequestParam int minNumber) {
         if (minNumber.isPresent()) {
             gameService.getGame().getNumberGenerator().setMinNumber(minNumber.get());
-            log.debug("gameService.getGame().getNumberGenerator().setMinNumber(minNumber.get()) = {}" , minNumber.get());
-            log.debug("gameService.getGame().getNumberGenerator().getMinNumber() = {}" , gameService.getGame().getNumberGenerator().getMinNumber());
             gameplayService.minNumber();
         }
         if (maxNumber.isPresent()) {
@@ -81,7 +70,6 @@ public class GameController {
         if (minNumber.isPresent() || maxNumber.isPresent()) {
             gameService.reset();
         }
-
         return GameMappings.REDIRECT_PLAY;
     }
 
@@ -92,34 +80,27 @@ public class GameController {
     }
 
 
-
-
     @GetMapping(GameMappings.GAMEPLAYS)
-    public String allGameplay(Model model, HttpSession httpSession){
+    public String allGameplay(Model model, HttpSession httpSession) {
 
-        User user =  (User) httpSession.getAttribute("user");
-        List<Gameplay>  gameplaysList = gameplayService.findAllGameplays();
-
+        User user = (User) httpSession.getAttribute("user");
+        List<Gameplay> gameplaysList = gameplayService.findAllGameplays();
         gameplaysList.removeIf(o -> o.getUser().getId() != user.getId());
-//        model.addAttribute("gameplays", gameplayService.findAllGameplays());
         model.addAttribute("gameplays", gameplaysList);
 
-//        log.debug("User user =  (User) httpSession.getAttribute(\"user\"); = {}", user);
         return ViewNames.GAMEPLAYS;
     }
 
     @GetMapping(GameMappings.GAMEPLAY_DETAILS)
-    public String showGameplay(@PathVariable("id") int id, Model model, HttpSession httpSession){
+    public String showGameplay(@PathVariable("id") int id, Model model, HttpSession httpSession) {
 
-        User user =  (User) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
         Gameplay gameplayDetail = gameplayService.findById(id);
 
-        if(gameplayDetail.getUser().getId() ==user.getId()) {
-//        model.addAttribute("gameplay", gameplayService.findById(id));
+        if (gameplayDetail.getUser().getId() == user.getId()) {
             model.addAttribute("gameplay", gameplayDetail);
         }
 
         return ViewNames.GAMEPLAY_DETAILS;
     }
-
 }
