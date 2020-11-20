@@ -39,7 +39,7 @@ public class RequestInterceptor implements HandlerInterceptor {
                 FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(request);
                 outputFlashMap.put(AttributeNames.LOGIN_MESSAGE, "Sorry, you have to login before");
                 RequestContextUtils.saveOutputFlashMap(UserMappings.LOGIN, request, response);
-                response.sendRedirect(UserMappings.LOGIN);
+                response.sendRedirect(UserMappings.HOME_LOGIN);
                 return false;
             }
         }

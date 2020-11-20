@@ -8,8 +8,15 @@
           th:text="${__${T(braksator.artur.util.AttributeNames).RESULT_MESSAGE}__}"/>
     <attr sel="#game-form"
           th:action="@{__${T(braksator.artur.util.GameMappings).PLAY}__}"/>
+    <attr sel="#enter-minNumber" th:text="#{game.enter.minNumber}"/>
+    <attr sel="#enter-maxNumber" th:text="#{game.enter.maxNumber}"/>
+    <attr sel="#min-max-number-submit" th:value="#{game.changeRange}"/>
+
     <attr sel="#enter-guess" th:text="#{game.enter.guess}"/>
     <attr sel="#submit" th:value="#{game.submit}"/>
+
+    <attr sel="#logout" th:value="#{game.logout}"/>
+    <attr sel="#scores" th:value="#{game.scores}"/>
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>
 </thlogic>

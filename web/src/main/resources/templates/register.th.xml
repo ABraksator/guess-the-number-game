@@ -18,8 +18,35 @@
 
 
     <!--<attr sel="#login-fail-message" th:text="${message}" />-->
-    <attr sel="#login-fail-message" th:text="${registerMessage}" />
+
+
+    <attr sel="#registration-message" th:text="#{user.registration.request}" />
+
+    <attr sel="#registration-fail-message" th:text="${registerMessage}" />
+
+
+
+
+    <attr sel="#userNameLabel" th:text="#{user.login.nameLabel}"/>
+
+    <attr sel="#userEmailLabel" th:text="#{user.registration.emailLabel}"/>
+
+    <attr sel="#userPasswordLabel" th:text="#{user.login.passwordLabel}"/>
+
+    <attr sel="#registrationLabel" th:value="#{user.registration.registrationLabel}"/>
+
+
+    <attr sel="#loginLabel" th:value="#{user.registration.loginLabel}"/>
+
+    <attr sel="#loginLink" th:text="#{user.registration.loginLink}"/>
+
+
+
+
+
     <attr sel="#footerId" th:replace="~{fragments/footer :: footer}"/>
+
+
 
     <attr sel="headId" th:replace= "~{fragments/head :: head}" />
 </thlogic>

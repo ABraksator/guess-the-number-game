@@ -52,18 +52,18 @@
     <!--<form action="/user/login" method="post" modelAttribute="loginForm">-->
     <form id="actionFrom" action="/user/login" method="post" >
 
-        <label id="userNameLabel" for="userNameLab">User Name:</label><br>
-        <input id="userNameLab" type="text" name="userName"><br>
+        <label id="userNameLabel" for="userNameLabel">User Name:</label><br>
+        <input type="text" name="userName"><br>
 
 
-        <label for="password">Password:</label><br>
-        <input id="password" type="text" name="password"><br><br>
+        <label id="userPasswordLabel" for="userPasswordLabel">Password:</label><br>
+        <input type="text" name="password"><br><br>
 
 
-        <input type="submit" value="Login">
+        <input id="loginLabel" type="submit" value="Login">
     </form>
 
-    <a href="register">Don't have account? Click to register</a>
+    <a id="registrationLink"href="register">Don't have account? Click to register</a>
 
 
     <footer id="footerId">

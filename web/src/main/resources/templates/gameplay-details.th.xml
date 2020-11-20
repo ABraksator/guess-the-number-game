@@ -39,6 +39,8 @@
     <!--</attr>-->
     <!--<attr sel="#GameplayTable" th:remove="all-but-first">-->
     <attr sel="#GameplayDetailTable" >
+        <attr sel="#createdAt" th:text="#{gameplays.createdAt}"/>
+        <attr sel="#result" th:text="#{gameplays.result}"/>
         <attr sel="/tr[1]" th:each="gameplay : ${gameplay}">
             <attr sel="td.CreatedAt" th:text="${gameplay.created}" />
             <!--<attr sel="td.Result" th:if="${gameplay.isWon}">-->
@@ -76,7 +78,7 @@
 
         </attr>
     </attr>
-
+<attr sel="#gameplays-label" th:value="#{game.scores}"/>
 
     <attr sel="#footerId"
           th:replace="~{fragments/footer :: footer}"/>

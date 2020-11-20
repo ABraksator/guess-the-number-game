@@ -16,6 +16,13 @@
 <!--<attr sel="#userName" th:text="${__${T(braksator.artur.form.LoginForm).userName}__}" />-->
 
 
+<attr sel="#login-message" th:text="#{user.login.request}"/>
+<attr sel="#userNameLabel" th:text="#{user.login.nameLabel}"/>
+<attr sel="#userPasswordLabel" th:text="#{user.login.passwordLabel}"/>
+<attr sel="#loginLabel" th:value="#{user.login.loginLabel}"/>
+
+<attr sel="#registrationLink" th:text="#{user.login.registrationLink}"/>
+
 
     <!--<attr sel="#login-fail-message" th:text="${message}" />-->
     <attr sel="#login-fail-message" th:text="${loginMessage}" />
